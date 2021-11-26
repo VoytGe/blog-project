@@ -10,9 +10,12 @@ from flask_login import UserMixin, login_user, LoginManager, login_required, cur
 from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 import os
+from boto.s3.connection import S3Connection
+
+conn = S3Connection(os.environ["SECRET_KEY"], os.environ["DATABASE_URL"])
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
@@ -49,10 +52,10 @@ def admin_only(function):
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", 'sqlite:///blog.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", 'sqlite:///blog.db')
 app.config['SQLALCHEMY_BINDS'] = {
-    'users': os.environ.get("DATABASE_URL", 'sqlite:///users.db'),
-    "comments": os.environ.get("DATABASE_URL", "sqlite:///comments.db")
+    'users': os.getenv("DATABASE_URL", 'sqlite:///users.db'),
+    "comments": os.getenv("DATABASE_URL", "sqlite:///comments.db")
 }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
