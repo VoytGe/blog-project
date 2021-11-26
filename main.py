@@ -53,17 +53,12 @@ def admin_only(function):
 
 ##CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", 'sqlite:///blog.db')
-app.config['SQLALCHEMY_BINDS'] = {
-    'users': os.getenv("DATABASE_URL", "sqlite:///users.db"),
-    "comments": os.getenv("DATABASE_URL", "sqlite:///comments.db"),
-}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
 ##CONFIGURE TABLES
 class User(UserMixin, db.Model):
-    __bind_key__ = "users"
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False)
@@ -97,7 +92,6 @@ class BlogPost(db.Model):
 
 
 class Comment(db.Model):
-    __bind_key__ = "comments"
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String, nullable=False)
