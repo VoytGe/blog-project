@@ -52,7 +52,7 @@ def admin_only(function):
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://gbxtoxwowgtivy:aaf1a91bdb15f97e870555e7fe06ed0f1e120a11a28da8ebf2b3f409b9a08c11@ec2-176-34-105-15.eu-west-1.compute.amazonaws.com:5432/d4it6hft0djdld"
 app.config['SQLALCHEMY_BINDS'] = {
     'users': 'sqlite:///users.db',
     "comments": "sqlite:///comments.db"
