@@ -52,9 +52,9 @@ def admin_only(function):
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", 'sqlite:///blog.db')
 app.config['SQLALCHEMY_BINDS'] = {
-    'users':'sqlite:///users.db',
+    'users': 'sqlite:///users.db',
     "comments": "sqlite:///comments.db"
 }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
