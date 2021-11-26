@@ -59,7 +59,7 @@ def admin_only(function):
 ##CONNECT TO DB
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", 'sqlite:///blog.db')
 app.config['SQLALCHEMY_BINDS'] = {
-    'users': os.getenv("HEROKU_POSTGRESQL_BROWN_URL", "sqlite:///users.db"),
+    'users': os.getenv("DATABASE_URL", "sqlite:///users.db"),
 #     "comments": "postgres://hcltntwfcownzx:c172ddaa141d17f018820a8291e27d6cb03dc7ef0a0c9f2720f46fbc668842c0@ec2-63-32-7-190.eu-west-1.compute.amazonaws.com:5432/dc6uqsi72osd64"
 }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
