@@ -11,12 +11,8 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 import os
 from boto.s3.connection import S3Connection
-import psycopg2
 
-DATABASE_URL = os.environ["DATABASE_URL"]
-
-s3 = S3Connection(os.environ["SECRET_KEY"], DATABASE_URL)
-conn = psycopg2.connect(DATABASE_URL, sslmode="require")
+s3 = S3Connection(os.environ["SECRET_KEY"], os.environ["DATABASE_URL"])
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
