@@ -57,10 +57,10 @@ def admin_only(function):
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://gbxtoxwowgtivy:aaf1a91bdb15f97e870555e7fe06ed0f1e120a11a28da8ebf2b3f409b9a08c11@ec2-176-34-105-15.eu-west-1.compute.amazonaws.com:5432/d4it6hft0djdld"
 app.config['SQLALCHEMY_BINDS'] = {
-    'users': os.getenv("HEROKU_POSTGRESQL_BROWN_URL"),
-    "comments": os.getenv("HEROKU_POSTGRESQL_MAROON_URL")
+    'users': os.getenv("postgres://mbzwsggnadjrjd:9a3319946d36610a8198446487e1d76d1442037e733d17afac1a424d87abb9d7@ec2-63-32-7-190.eu-west-1.compute.amazonaws.com:5432/dee635ogf0hvktL"),
+    "comments": os.getenv("postgres://hcltntwfcownzx:c172ddaa141d17f018820a8291e27d6cb03dc7ef0a0c9f2720f46fbc668842c0@ec2-63-32-7-190.eu-west-1.compute.amazonaws.com:5432/dc6uqsi72osd64")
 }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
