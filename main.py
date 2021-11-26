@@ -68,7 +68,7 @@ db = SQLAlchemy(app)
 
 ##CONFIGURE TABLES
 class User(UserMixin, db.Model):
-    # __bind_key__ = "users"
+    __bind_key__ = "users"
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), nullable=False)
@@ -102,7 +102,7 @@ class BlogPost(db.Model):
 
 
 class Comment(db.Model):
-    # __bind_key__ = "comments"
+    __bind_key__ = "comments"
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String, nullable=False)
