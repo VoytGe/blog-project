@@ -12,10 +12,10 @@ from flask_gravatar import Gravatar
 import os
 from boto.s3.connection import S3Connection
 
-# conn = S3Connection(os.environ["SECRET_KEY"], os.environ["DATABASE_URL"])
+s3 = S3Connection(os.environ["SECRET_KEY"], os.environ["DATABASE_URL"])
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 ckeditor = CKEditor(app)
 Bootstrap(app)
 
