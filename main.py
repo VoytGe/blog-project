@@ -12,12 +12,7 @@ from flask_gravatar import Gravatar
 import os
 from boto.s3.connection import S3Connection
 
-s3 = S3Connection(
-    os.environ["SECRET_KEY"],
-    os.environ["DATABASE_URL"],
-    os.environ["HEROKU_POSTGRESQL_BROWN_URL"],
-    os.environ["HEROKU_POSTGRESQL_MAROON_URL"],
-)
+s3 = S3Connection(os.environ["SECRET_KEY"], os.environ["DATABASE_URL"])
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
