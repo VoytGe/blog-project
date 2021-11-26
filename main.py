@@ -14,6 +14,9 @@ from boto.s3.connection import S3Connection
 
 s3 = S3Connection(
     os.environ["SECRET_KEY"],
+    os.environ["DATABASE_URL"],
+    os.environ["HEROKU_POSTGRESQL_BROWN_URL"],
+    os.environ["HEROKU_POSTGRESQL_MAROON_URL"],
 )
 
 app = Flask(__name__)
@@ -54,7 +57,7 @@ def admin_only(function):
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://gbxtoxwowgtivy:aaf1a91bdb15f97e870555e7fe06ed0f1e120a11a28da8ebf2b3f409b9a08c11@ec2-176-34-105-15.eu-west-1.compute.amazonaws.com:5432/d4it6hft0djdld"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 # app.config['SQLALCHEMY_BINDS'] = {
 #     'users': "postgres://mbzwsggnadjrjd:9a3319946d36610a8198446487e1d76d1442037e733d17afac1a424d87abb9d7@ec2-63-32-7-190.eu-west-1.compute.amazonaws.com:5432/dee635ogf0hvktL",
 #     "comments": "postgres://hcltntwfcownzx:c172ddaa141d17f018820a8291e27d6cb03dc7ef0a0c9f2720f46fbc668842c0@ec2-63-32-7-190.eu-west-1.compute.amazonaws.com:5432/dc6uqsi72osd64"
