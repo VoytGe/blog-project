@@ -12,7 +12,12 @@ from flask_gravatar import Gravatar
 import os
 from boto.s3.connection import S3Connection
 
-s3 = S3Connection(os.environ["SECRET_KEY"], os.environ["DATABASE_URL"])
+s3 = S3Connection(
+    os.environ["SECRET_KEY"],
+    os.environ["DATABASE_URL"],
+    os.environ["HEROKU_POSTGRESQL_BROWN_URL"],
+    os.environ["HEROKU_POSTGRESQL_MAROON_URL"],
+)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
@@ -52,11 +57,11 @@ def admin_only(function):
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://gbxtoxwowgtivy:aaf1a91bdb15f97e870555e7fe06ed0f1e120a11a28da8ebf2b3f409b9a08c11@ec2-176-34-105-15.eu-west-1.compute.amazonaws.com:5432/d4it6hft0djdld"
-# app.config['SQLALCHEMY_BINDS'] = {
-#     'users': 'sqlite:///users.db',
-#     "comments": "sqlite:///comments.db"
-# }
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL", 'sqlite:///blog.db')
+app.config['SQLALCHEMY_BINDS'] = {
+    'users': os.getenv("HEROKU_POSTGRESQL_BROWN_URL", 'sqlite:///users.db'),
+    "comments": os.getenv("HEROKU_POSTGRESQL_MAROON_URL", "sqlite:///comments.db")
+}
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
