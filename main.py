@@ -57,7 +57,7 @@ def admin_only(function):
 
 
 ##CONNECT TO DB
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_UR")
 app.config['SQLALCHEMY_BINDS'] = {
     'users': os.getenv("HEROKU_POSTGRESQL_BROWN_URL"),
     "comments": os.getenv("HEROKU_POSTGRESQL_MAROON_URL")
